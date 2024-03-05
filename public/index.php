@@ -4,6 +4,9 @@ session_start();
 
 $route = $_SERVER['REQUEST_URI'];
 
+require_once '.././controllers/userController.php';
+require_once '.././libraries/auth.php';
+
 switch ($route) {
     case '/' :
         require '.././views/home.php';
@@ -16,9 +19,11 @@ switch ($route) {
         break;
     case '/login' :
         require '.././views/login.php';
+        loginController();
         break;
     case '/registration' :
         require '.././views/registration.php';
+        registerController();
         break;
     default:
         http_response_code(404);

@@ -1,25 +1,16 @@
 <?php
 require_once "../database/connection.php";
 
-// test
-function showAllUsers(){
-    $pdo = connectDB();  
-    $sql = "SELECT * FROM user";
-    $stm = $pdo->query($sql);
-    $users = $stm->fetchAll(PDO::FETCH_ASSOC);
-    return $users;
-}
-
-function addUser($username, $pwd){
+function addUser($username, $password){
     $pdo = connectDB();
-    $hashedpassword = hashPassword($pwd);
+    $hashedpassword = hashPassword($password);
     $data = [$username, $hashedpassword];
-    $sql = "INSERT INTO user (username, pwd) VALUES(?,?,?,?)";
+    $sql = "INSERT INTO user (username, pwd) VALUES(?,?)";
     $stm=$pdo->prepare($sql);
     return $stm->execute($data);
 }
 
-function login($username, $pwd){
+function login($username, $password){
     $pdo = connectDB();
     $sql = "SELECT * FROM user WHERE username=?";
     $stm= $pdo->prepare($sql);
@@ -27,7 +18,7 @@ function login($username, $pwd){
     $user = $stm->fetch(PDO::FETCH_ASSOC);
     $hashedpassword = $user["pwd"];
 
-    if($hashedpassword && password_verify($pwd, $hashedpassword))
+    if($hashedpassword && password_verify($password, $hashedpassword))
         return $user;
     else 
         return false;

@@ -1,40 +1,44 @@
 <?php
-require_once "database/models/user.php";
-require_once 'libraries/cleaners.php';
+require_once ".././database/models/user.php";
+require_once ".././libraries/cleaners.php";
 
 function registerController(){
-    if(isset($_POST['username'], $_POST['pwd'])){
+    if(isset($_POST['username'], $_POST['password'])){
         $username = cleanUpInput($_POST['username']);
-        $pwd = cleanUpInput($_POST['pwd']);
+        $password = cleanUpInput($_POST['password']);
 
         try {
-            addUser($username, $pwd);
+            addUser($username, $password);
             header("Location: /login"); 
         } catch (PDOException $e){
             echo "Virhe tietokantaan tallennettaessa: " . $e->getMessage();
         }
-    } else {
-        require "views/register.view.php";
-    }
+    } 
+    // else {
+    //     require "../views/registration.php";
+    // }
 }
 
 function loginController(){
-    if(isset($_POST['username'], $_POST['pwd'])){
+    if(isset($_POST['username'], $_POST['password'])){
         $username = cleanUpInput($_POST['username']);
-        $pwd = cleanUpInput($_POST['pwd']);
+        $password = cleanUpInput($_POST['password']);
   
-        $result = login($username, $pwd);
+        $result = login($username, $password);
         if($result){
             $_SESSION['username'] = $result['username'];
             $_SESSION['userid'] = $result['userid'];
             $_SESSION['session_id'] = session_id();
             header("Location: /"); 
-        } else {
-            require "views/login.php";
-        }
-    } else {
-        require "views/login.php";
+        } 
     }
+        // else {
+        //     require "../views/login.php";
+        // }
+     
+    // else {
+    //     require "../views/login.php";
+    // }
 }
 
 function logoutController(){
