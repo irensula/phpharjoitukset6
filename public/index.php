@@ -4,7 +4,8 @@ session_start();
 
 $route = $_SERVER['REQUEST_URI'];
 
-require_once '.././controllers/userController.php';
+require_once '.././controllers/userManagement.php';
+require_once '.././controllers/reviewManagement.php';
 require_once '.././libraries/auth.php';
 
 switch ($route) {

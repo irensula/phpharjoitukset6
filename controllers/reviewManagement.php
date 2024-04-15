@@ -1,19 +1,31 @@
-<?php
-require_once "../database/connection.php";
+<?php 
+require_once "database/models/review.php";
+require_once 'libraries/cleaners.php';
 
 function viewReviewsController(){
-    $allnews = getAllReviews();
-    require "./../views/reviews.php";    
+    $allReviews = null;
+    if (isset($_POST['section'])) {
+        $section = cleanUpInput($_POST['section']);
+        $allReviews = getSectionArticles($section);
+        if($section == "Kaikki uutiset") {
+            $allReviews = getAllReviews();
+        }
+    }
+    else {
+        $allReviews = getAllReviews();
+    }
+    require "views/review.view.php";    
 }
 
 function addArticleController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'])){
+    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST['section'],)){
         $title = cleanUpInput($_POST['newstitle']);
         $text = cleanUpInput($_POST['newstext']);
         $time = cleanUpInput($_POST['newstime']);
-        $removetime = cleanUpInput($_POST['removedate']);   
+        $removetime = cleanUpInput($_POST['removedate']);
+        $section = cleanUpInput($_POST['section']);   
         $userid = $_SESSION["userid"];
-        addArticle($title, $text, $time, $removetime, $userid); 
+        addArticle($title, $text, $time, $removetime, $section, $userid); 
         header("Location: /");    
     } else {
         require "views/newArticle.view.php";
@@ -39,6 +51,7 @@ function editArticleController(){
         $dbtime = $news['created'];
         $time = implode("T", explode(" ",$dbtime));
         $removetime = $news['expirydate'];
+        $section = $news['section'];
         $id = $news['articleid'];
     
         require "views/updateArticle.view.php";
@@ -49,15 +62,16 @@ function editArticleController(){
 }
 
 function updateArticleController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST["id"])){
+    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST['section'], $_POST["id"])){
         $title = cleanUpInput($_POST['newstitle']);
         $text = cleanUpInput($_POST['newstext']);
         $time = cleanUpInput($_POST['newstime']);
         $removetime = cleanUpInput($_POST['removedate']);
+        $section = cleanUpInput($_POST['section']);
         $id = cleanUpInput($_POST["id"]);
 
         try{
-            updateArticle($title, $text, $time, $removetime, $id);
+            updateArticle($title, $text, $time, $removetime, $section, $id);
             header("Location: /");    
         } catch (PDOException $e){
                 echo "Virhe uutista päivitettäessä: " . $e->getMessage();
@@ -85,3 +99,8 @@ function deleteArticleController(){
     header("Location: /");
     exit;
 }
+
+
+
+
+
