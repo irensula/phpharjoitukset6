@@ -15,7 +15,7 @@ function registerController(){
         }
     } 
     // else {
-    //     require "../views/registration.php";
+    //     require "../views/registration.view.php";
     // }
 }
 
@@ -33,11 +33,11 @@ function loginController(){
         } 
     }
         // else {
-        //     require "../views/login.php";
+        //     require "../views/login.view.php";
         // }
      
     // else {
-    //     require "../views/login.php";
+    //     require "../views/login.view.php";
     // }
 }
 

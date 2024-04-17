@@ -5,7 +5,7 @@ function hashPassword($password){
     return $hashedpassword;
 }
 
-function isLoggedIn(){
+function isLoggedIn(){ 
     if(isset($_SESSION['username'], $_SESSION['userid']) && ($_SESSION['session_id'] == session_id())){
         return true;
     } else {
