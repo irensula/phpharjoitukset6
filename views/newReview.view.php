@@ -1,4 +1,4 @@
-<?php require "partials/head.php"; ?>
+<?php require "partials/header.php"; ?>
 
 <h2 class="centered">Syötä arvostelu</h2>
 
@@ -17,7 +17,7 @@
     <label for="arvosana">Poistopäivä:</label>
     <input id="arvosana" type="text" name="reviewGrade" value=<?=$grade?>>
     
-    <input type="hidden" id="reviewid" name="id" value=<?=$id?>>
+    <!-- <input type="hidden" id="reviewid" name="id" value=<?=$id?>> -->
     
     <label for="tyyppi">Valitse osasto:</label>
     <select id="tyyppi" name="type">

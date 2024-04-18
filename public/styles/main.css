@@ -1,3 +1,105 @@
+
+header {
+    background: violet;
+    padding: 2em;
+    text-align: center;
+}
+.header-navbar {
+    background-image: url('../images/movie.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    height: 600px;
+}
+.header-navbar ul {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 50px;
+}
+
+/* <button class="button-27" role="button">Button 27</button> */
+.navbutton {
+  appearance: none;
+  background-color: #000000;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 150px;
+  will-change: transform;
+  text-transform: uppercase;
+}
+
+.navbutton:disabled {
+  pointer-events: none;
+}
+
+.navbutton:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.navbutton:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.inputarea {
+    display:flex;
+    width: 60% ;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+input, textarea {
+    width: 100%;
+    flex-grow: 1;
+}
+
+#sendbutton {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.centeredtext, .centered {
+    text-align: center;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .review {
-    
+    border: solid 0.1em;
+    padding: 1em 2em;
+    border-radius: 2em;
+    width: 40%;
 }

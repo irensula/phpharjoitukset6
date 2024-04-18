@@ -17,26 +17,27 @@ function viewReviewsController(){
     require "views/review.view.php";    
 }
 
+// POST values are from "name" in views
 function addReviewController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST['type'],)){
-        $title = cleanUpInput($_POST['newstitle']);
-        $text = cleanUpInput($_POST['newstext']);
-        $time = cleanUpInput($_POST['newstime']);
-        $removetime = cleanUpInput($_POST['removedate']);
-        $type = cleanUpInput($_POST['type']);   
-        $userid = $_SESSION["userid"];
-        addArticle($title, $text, $time, $removetime, $type, $userid); 
+    if(isset($_POST['reviewName'], $_POST['reviewText'], $_POST['reviewDate'], $_POST['reviewGrade'], $_POST['type'])){
+        $rName = cleanUpInput($_POST['reviewName']);
+        $rText = cleanUpInput($_POST['reviewText']);
+        $rDate = cleanUpInput($_POST['reviewDate']);
+        $rGrade = cleanUpInput($_POST['reviewGrade']);
+        $rType = cleanUpInput($_POST['type']);   
+        $userId = $_SESSION["userid"];
+        addReview($rDate, $rType, $rName, $rGrade, $rText, $userId); 
         header("Location: /");    
     } else {
-        require "views/newArticle.view.php";
+        require "views/newReview.view.php";
     }
 }
 
 function editReviewController(){
     try {
         if(isset($_GET["id"])){
-            $id = cleanUpInput($_GET["id"]);
-            $news = getArticleById($id);
+            $rID = cleanUpInput($_GET["id"]);
+            $reviews = getReviewById($rID);
         } else {
             echo "Virhe: id puuttuu ";    
         }
@@ -44,17 +45,18 @@ function editReviewController(){
         echo "Virhe uutista haettaessa: " . $e->getMessage();
     }
     
-    if($news){
-        $id = $news['articleid'];
-        $title = $news['title'];
-        $text = $news['text'];
-        $dbtime = $news['created'];
-        $time = implode("T", explode(" ",$dbtime));
-        $removetime = $news['expirydate'];
-        $type = $news['type'];
-        $id = $news['articleid'];
+    if($reviews){
+        $rID = $reviews['reviewID'];
+        $rDate = $reviews['date'];
+        $rType = $reviews['type'];
+        $rName = $reviews['name'];
+        // $dbtime = $reviews['created'];
+        // $time = implode("T", explode(" ",$dbtime));
+        $rGrade = $reviews['grade'];
+        $rText = $reviews['text'];
+        $userId = $reviews['userID'];
     
-        require "views/updateArticle.view.php";
+        require "views/updateReview.view.php";
     } else {
         header("Location: /");
         exit;
@@ -85,8 +87,8 @@ function updateReviewController(){
 function deleteReviewController(){
     try {
         if(isset($_GET["id"])){
-            $id = cleanUpInput($_GET["id"]);
-            deleteArticle($id);
+            $rID = cleanUpInput($_GET["id"]);
+            deleteReview($rID);
         } else {
             echo "Virhe: id puuttuu ";    
         }
@@ -94,7 +96,7 @@ function deleteReviewController(){
         echo "Virhe uutista poistettaessa: " . $e->getMessage();
     }
 
-    $allnews = getAllArticles();
+    $allReviews = getAllReviews();
 
     header("Location: /");
     exit;

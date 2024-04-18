@@ -1,87 +1,52 @@
 <?php
 require_once "../database/connection.php";
 
-function viewReviewsController(){
-    $allnews = getAllReviews();
-    require "./../views/reviews.php";    
+function getAllReviews(){
+    $pdo = connectDB();
+    $sql = "SELECT * FROM review";
+    $stm = $pdo->query($sql);
+    $all = $stm->fetchAll(PDO::FETCH_ASSOC);
+    return $all;
 }
 
-function addArticleController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'])){
-        $title = cleanUpInput($_POST['newstitle']);
-        $text = cleanUpInput($_POST['newstext']);
-        $time = cleanUpInput($_POST['newstime']);
-        $removetime = cleanUpInput($_POST['removedate']);   
-        $userid = $_SESSION["userid"];
-        addArticle($title, $text, $time, $removetime, $userid); 
-        header("Location: /");    
-    } else {
-        require "views/newArticle.view.php";
-    }
+// function arguments are variables from addReviewController
+function addReview($rDate, $rType, $rName, $rGrade, $rText, $userId){
+    $pdo =connectDB();
+    $data = [$rDate, $rType, $rName, $rGrade, $rText, $userId];
+    $sql = "INSERT INTO review (date, type, name, grade, text, userID) VALUES(?,?,?,?,?,?)";
+    $stm=$pdo->prepare($sql);
+    return $stm->execute($data);
 }
 
-function editArticleController(){
-    try {
-        if(isset($_GET["id"])){
-            $id = cleanUpInput($_GET["id"]);
-            $news = getArticleById($id);
-        } else {
-            echo "Virhe: id puuttuu ";    
-        }
-    } catch (PDOException $e){
-        echo "Virhe uutista haettaessa: " . $e->getMessage();
-    }
-    
-    if($news){
-        $id = $news['articleid'];
-        $title = $news['title'];
-        $text = $news['text'];
-        $dbtime = $news['created'];
-        $time = implode("T", explode(" ",$dbtime));
-        $removetime = $news['expirydate'];
-        $id = $news['articleid'];
-    
-        require "views/updateArticle.view.php";
-    } else {
-        header("Location: /");
-        exit;
-    }
+function getReviewById($rID){
+    $pdo = connectDB();
+    $sql = "SELECT * FROM review WHERE reviewID=?";
+    $stm= $pdo->prepare($sql);
+    $stm->execute([$rID]);
+    $all = $stm->fetch(PDO::FETCH_ASSOC);
+    return $all;
 }
 
-function updateArticleController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST["id"])){
-        $title = cleanUpInput($_POST['newstitle']);
-        $text = cleanUpInput($_POST['newstext']);
-        $time = cleanUpInput($_POST['newstime']);
-        $removetime = cleanUpInput($_POST['removedate']);
-        $id = cleanUpInput($_POST["id"]);
-
-        try{
-            updateArticle($title, $text, $time, $removetime, $id);
-            header("Location: /");    
-        } catch (PDOException $e){
-                echo "Virhe uutista päivitettäessä: " . $e->getMessage();
-        }
-    } else {
-        header("Location: /");
-        exit;
-    }
+function deleteReview($rID){
+    $pdo = connectDB();
+    $sql = "DELETE FROM review WHERE reviewID=?";
+    $stm=$pdo->prepare($sql);
+    return $stm->execute([$rID]);
 }
 
-function deleteArticleController(){
-    try {
-        if(isset($_GET["id"])){
-            $id = cleanUpInput($_GET["id"]);
-            deleteArticle($id);
-        } else {
-            echo "Virhe: id puuttuu ";    
-        }
-    } catch (PDOException $e){
-        echo "Virhe uutista poistettaessa: " . $e->getMessage();
-    }
-
-    $allnews = getAllArticles();
-
-    header("Location: /");
-    exit;
+function updateReview($rDate, $rType, $rName, $rGrade, $rText, $rID){
+    $pdo = connectDB();
+    $data = [$rDate, $rType, $rName, $rGrade, $rText, $rID];
+    $sql = "UPDATE review SET date = ?, type = ?, name = ?, grade = ?, text = ? WHERE reviewID = ?";
+    $stm = $pdo->prepare($sql);
+    return $stm->execute($data);
 }
+
+function getReviewType($rType){
+    $pdo =connectDB();
+    $sql = "SELECT * FROM review WHERE type = ?";
+    $stm=$pdo->prepare($sql);
+    $stm->execute(array($rType));
+    $all = $stm->fetchAll(PDO::FETCH_ASSOC);
+    return $all;
+} 
