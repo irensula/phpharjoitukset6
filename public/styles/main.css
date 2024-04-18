@@ -1,10 +1,4 @@
-
-header {
-    background: violet;
-    padding: 2em;
-    text-align: center;
-}
-.header-navbar {
+body {
     background-image: url('../images/movie.jpg');
     background-repeat: no-repeat;
     background-position: center center;
@@ -13,7 +7,7 @@ header {
     -o-background-size: cover;
     background-size: cover;
     color: white;
-    height: 600px;
+    height: 100vh;
 }
 .header-navbar ul {
     display: flex;
@@ -23,9 +17,32 @@ header {
     justify-content: flex-end;
     padding: 50px;
 }
-
+.container {
+    width: 350px;
+    float: right;
+    padding: 50px 100px ;
+    background-color: #000000;
+    border-radius: 15px;
+    margin: 50px;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+.container h1 {
+    text-transform: uppercase;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.container form {
+    font-size: 18px;
+}
+.container input {
+    margin: 20px 0px 30px 0px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    height: 30px;
+    outline: none;
+}
 /* <button class="button-27" role="button">Button 27</button> */
-.navbutton {
+.navbutton, .yellow-button {
   appearance: none;
   background-color: #000000;
   border: 2px solid #1A1A1A;
@@ -53,17 +70,24 @@ header {
   will-change: transform;
   text-transform: uppercase;
 }
-
-.navbutton:disabled {
+.yellow-button {
+    background-color: #ecde00;
+    color: #000;
+}
+.navbutton:disabled, .yellow-button:disabled {
   pointer-events: none;
 }
 
-.navbutton:hover {
+.navbutton:hover, .yellow-button:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
+.yellow-button:hover {
+    box-shadow: rgba(245,230,0,0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
 
-.navbutton:active {
+.navbutton:active, .yellow-button:active {
   box-shadow: none;
   transform: translateY(0);
 }
