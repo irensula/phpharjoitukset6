@@ -1,16 +1,16 @@
 <?php require "../partials/header.php"; ?>
 
     <div class="form-container">
-        <h1>Registration</h1>
+        <h1>Rekisetröidy</h1>
 
         <form action="/registration" method="post">
-            <label for="username">Write your name:</label>
+            <label for="username">Kirjoita nimesi:</label>
             <input type="text" name="username" id="username">
 
-            <label for="password">Enter your password:</label>
+            <label for="password">Kirjoita salasasi:</label>
             <input type="password" name="password" id="password">
 
-            <button class="yellow-button">Submit</button>
+            <button class="yellow-button">Lähetä</button>
         </form>
     </div>
 

@@ -4,10 +4,10 @@
     <h2 class="centered">Kaikki arvostelut</h2>
     <select id="type" name="type">
                 <option value="Kaikki tyypit">Kaikki tyypit</option>
-                <option value="Kirjat">Kirjat</option>
-                <option value="Pelit">Pelit</option>
-                <option value="Elokuva">Elokuva</option>
-                <option value="Sarjat">Sarjat</option>
+                <option value="kirja">Kirjat</option>
+                <option value="peli">Pelit</option>
+                <option value="elokuva">Elokuva</option>
+                <option value="sarja">Sarjat</option>
             </select>
             <button type="submit">Submit</button>
     <div class = "review-container">

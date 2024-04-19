@@ -3,6 +3,6 @@
     // require_once ".././database/models/user.php";
 ?>
     
-<h1>Home</h1>
+<div class="home-container"></div>
     
 <?php require "../partials/footer.php"; ?>

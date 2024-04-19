@@ -3,13 +3,13 @@
     <h1>Kirjaudu</h1>
 
     <form action="/login" method="post">
-        <label for="username">Write your name:</label>
+        <label for="username">Kirjoita nimesi:</label>
         <input type="text" name="username" id="username">
 
-        <label for="password">Enter your password:</label>
+        <label for="password">Kirjoita salasasi:</label>
         <input type="password" name="password" id="password">
 
-        <button class="yellow-button">Submit</button>
+        <button class="yellow-button">Lähetä</button>
     </form>
 </div>
 </body>
