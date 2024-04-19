@@ -1,6 +1,6 @@
 <?php 
-require_once "database/models/review.php";
-require_once 'libraries/cleaners.php';
+require_once "../database/models/review.php";
+require_once '../libraries/cleaners.php';
 
 function viewReviewsController(){
     $allReviews = null;
@@ -14,30 +14,29 @@ function viewReviewsController(){
     else {
         $allReviews = getAllReviews();
     }
-    require "views/review.view.php";    
+    require ".././views/review.view.php";    
 }
 
 // POST values are from "name" in views
 function addReviewController(){
-    if(isset($_POST['reviewName'], $_POST['reviewText'], $_POST['reviewDate'], $_POST['reviewGrade'], $_POST['type'])){
+    if(isset($_POST['reviewName'], $_POST['reviewText'], $_POST['reviewGrade'], $_POST['type'])){
         $rName = cleanUpInput($_POST['reviewName']);
         $rText = cleanUpInput($_POST['reviewText']);
-        $rDate = cleanUpInput($_POST['reviewDate']);
         $rGrade = cleanUpInput($_POST['reviewGrade']);
         $rType = cleanUpInput($_POST['type']);   
         $userId = $_SESSION["userid"];
-        addReview($rDate, $rType, $rName, $rGrade, $rText, $userId); 
-        header("Location: /");    
+        addReview($rType, $rName, $rGrade, $rText, $userId); 
+        header("Location: /all_reviews");    
     } else {
-        require "views/newReview.view.php";
+        require ".././views/newReview.view.php";
     }
 }
 
 function editReviewController(){
     try {
         if(isset($_GET["id"])){
-            $rID = cleanUpInput($_GET["id"]);
-            $reviews = getReviewById($rID);
+            $rId = cleanUpInput($_GET["id"]);
+            $reviews = getReviewById($rId);
         } else {
             echo "Virhe: id puuttuu ";    
         }
@@ -46,40 +45,37 @@ function editReviewController(){
     }
     
     if($reviews){
-        $rID = $reviews['reviewID'];
-        $rDate = $reviews['date'];
+        $rId = $reviews['reviewID'];
         $rType = $reviews['type'];
         $rName = $reviews['name'];
-        // $dbtime = $reviews['created'];
-        // $time = implode("T", explode(" ",$dbtime));
         $rGrade = $reviews['grade'];
         $rText = $reviews['text'];
         $userId = $reviews['userID'];
-    
-        require "views/updateReview.view.php";
-    } else {
-        header("Location: /");
+        require ".././views/updateReview.view.php";
+    } 
+    else {
+        header("Location: /all_reviews");
         exit;
     }
 }
 
 function updateReviewController(){
-    if(isset($_POST['newstitle'], $_POST['newstext'], $_POST['newstime'], $_POST['removedate'], $_POST['type'], $_POST["id"])){
-        $title = cleanUpInput($_POST['newstitle']);
-        $text = cleanUpInput($_POST['newstext']);
-        $time = cleanUpInput($_POST['newstime']);
-        $removetime = cleanUpInput($_POST['removedate']);
-        $type = cleanUpInput($_POST['type']);
-        $id = cleanUpInput($_POST["id"]);
+    if(isset($_POST['reviewName'], $_POST['reviewText'], $_POST['reviewGrade'], $_POST['type'], $_POST["reviewId"])){
+        $rName = cleanUpInput($_POST['reviewName']);
+        $rText = cleanUpInput($_POST['reviewText']);
+        $rGrade = cleanUpInput($_POST['reviewGrade']);
+        $rType = cleanUpInput($_POST['type']);
+        $rId = cleanUpInput($_POST["reviewId"]);
 
         try{
-            updateArticle($title, $text, $time, $removetime, $type, $id);
-            header("Location: /");    
+            updateReview($rType, $rName, $rGrade, $rText, $rId);
+            header("Location: /all_reviews");    
         } catch (PDOException $e){
                 echo "Virhe uutista päivitettäessä: " . $e->getMessage();
         }
-    } else {
-        header("Location: /");
+    } 
+    else {
+        header("Location: /all_reviews");
         exit;
     }
 }
@@ -87,8 +83,8 @@ function updateReviewController(){
 function deleteReviewController(){
     try {
         if(isset($_GET["id"])){
-            $rID = cleanUpInput($_GET["id"]);
-            deleteReview($rID);
+            $rId = cleanUpInput($_GET["id"]);
+            deleteReview($rId);
         } else {
             echo "Virhe: id puuttuu ";    
         }
@@ -98,7 +94,7 @@ function deleteReviewController(){
 
     $allReviews = getAllReviews();
 
-    header("Location: /");
+    header("Location: /all_reviews");
     exit;
 }
 

@@ -10,8 +10,10 @@ function getAllReviews(){
 }
 
 // function arguments are variables from addReviewController
-function addReview($rDate, $rType, $rName, $rGrade, $rText, $userId){
+function addReview($rType, $rName, $rGrade, $rText, $userId){
     $pdo =connectDB();
+    date_default_timezone_set('UTC'); // get date automatically
+    $rDate = date('Y-m-d'); // get date automatically
     $data = [$rDate, $rType, $rName, $rGrade, $rText, $userId];
     $sql = "INSERT INTO review (date, type, name, grade, text, userID) VALUES(?,?,?,?,?,?)";
     $stm=$pdo->prepare($sql);
@@ -34,9 +36,11 @@ function deleteReview($rID){
     return $stm->execute([$rID]);
 }
 
-function updateReview($rDate, $rType, $rName, $rGrade, $rText, $rID){
+function updateReview($rType, $rName, $rGrade, $rText, $rId){
     $pdo = connectDB();
-    $data = [$rDate, $rType, $rName, $rGrade, $rText, $rID];
+    date_default_timezone_set('UTC'); // get date automatically
+    $rDate = date('Y-m-d'); // get date automatically
+    $data = [$rDate, $rType, $rName, $rGrade, $rText, $rId];
     $sql = "UPDATE review SET date = ?, type = ?, name = ?, grade = ?, text = ? WHERE reviewID = ?";
     $stm = $pdo->prepare($sql);
     return $stm->execute($data);

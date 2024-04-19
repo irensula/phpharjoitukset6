@@ -1,5 +1,6 @@
 <?php require "../partials/header.php"; ?>
-    <div class="container">
+
+    <div class="form-container">
         <h1>Registration</h1>
 
         <form action="/registration" method="post">

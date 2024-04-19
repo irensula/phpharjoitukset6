@@ -14,9 +14,9 @@ function registerController(){
             echo "Virhe tietokantaan tallennettaessa: " . $e->getMessage();
         }
     } 
-    // else {
-    //     require "../views/registration.view.php";
-    // }
+    else {
+        require "../views/registration.view.php";
+    }
 }
 
 function loginController(){
@@ -27,14 +27,14 @@ function loginController(){
         $result = login($username, $password);
         if($result){
             $_SESSION['username'] = $result['username'];
-            $_SESSION['userid'] = $result['userid'];
+            $_SESSION['userid'] = $result['userID'];
             $_SESSION['session_id'] = session_id();
-            header("Location: /"); 
+            header("Location: /all_reviews"); 
         } 
     }
-        // else {
-        //     require "../views/login.view.php";
-        // }
+        else {
+            require "../views/login.view.php";
+        }
      
     // else {
     //     require "../views/login.view.php";

@@ -1,4 +1,4 @@
-<?php require "partials/header.php"; ?>
+<?php require "../partials/header.php"; ?>
 
 <h2 class="centered">Syötä arvostelu</h2>
 
@@ -11,23 +11,23 @@
     <label for="arvostelu">Arvostelu:</label>
     <textarea id="arvostelu" name="reviewText" rows="5" cols="30"><?=$rText?></textarea>     
     
-    <label for="paiva">Valitse arvostelun päivämäärä</label>
-    <input id="paiva" type="datetime-local"  name="reviewDate" value=<?=$rDate?>> 
-    
-    <label for="arvosana">Poistopäivä:</label>
+    <label for="arvosana">Arvosana:</label>
     <input id="arvosana" type="text" name="reviewGrade" value=<?=$rGrade?>>
     
-    <input type="hidden" id="reviewid" name="id" value=<?=$rID?>>
+    <input id="reviewid" name="reviewId" value=<?=$rId?>>
+    
     
     <label for="tyyppi">Valitse osasto:</label>
     <select id="tyyppi" name="type">
-        <option value="Kirjat">Kirja</option>
-        <option value="Elokuvat">Elokuva</option>
-        <option value="Pelit">Peli</option>
-        <option value="Sarjat">Sarja</option>
+        <option value="kirja">Kirja</option>
+        <option value="elokuva">Elokuva</option>
+        <option value="peli">Peli</option>
+        <option value="sarja">Sarja</option>
     </select>
     
     <input id="sendbutton" type="submit" value="Lähetä">
 
 </form>
 </div>
+
+<?php require "../partials/footer.php"; ?>
