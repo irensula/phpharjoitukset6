@@ -9,7 +9,7 @@
                 <option value="elokuva">Elokuva</option>
                 <option value="sarja">Sarjat</option>
             </select>
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit-button">Submit</button>
     <div class = "review-container">
         <form action="/" method="POST">
             <label for="type"></label>
@@ -20,7 +20,7 @@
         foreach($allReviews as $review): ?>
             
             <div class='review'>
-                <p><?=$review["type"]?></p>
+                <p class="review-type"><?=$review["type"]?></p>
                 <h3><?=$review["name"] ?></h3>
                 <p><?=$review["grade"]?></p>
                 <p><?=$review["text"]?></p>
