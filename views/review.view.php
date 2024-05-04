@@ -23,8 +23,24 @@
                 <p class="review-type"><?=$review["type"]?></p>
                 <h3><?=$review["name"] ?></h3>
                 <p><?=$review["grade"]?></p>
+                <!-- stars -->
+                <div class="star-rating">
+                    <ul class="list-inline">
+                    <?php 
+                    $start = 1;
+                    while ($start <= 5) {
+                        if ($review["grade"] < $start) { ?>
+                            <li class=list-inline-item><i class="fa-regular fa-star"></i></li>
+                            <?php } else { ?>
+                                <li class=list-inline-item><i class="fa-regular fa-star"><i class="fa-solid fa-star"></i></li>
+                            <?php } ?>
+                        $start++;
+                    <?php } ?>
+                    </ul>
+                </div>
+                <!-- stars -->
                 <p><?=$review["text"]?></p>
-                <p><?=$review["userID"]?> By user: <?=$review["userID"]?></p>
+                <p class="strong"><?=$review["userID"]?> By user: <?=$review["userID"]?></p>
                 <p><?=$review["date"]?></p>
                 <?php
                 if(isLoggedIn() && ($review["userID"] == $_SESSION['userid'])):
