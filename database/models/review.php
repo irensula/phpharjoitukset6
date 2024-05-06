@@ -3,7 +3,10 @@ require_once "../database/connection.php";
 
 function getAllReviews(){
     $pdo = connectDB();
-    $sql = "SELECT * FROM review";
+    $sql = "SELECT reviewID, date, type, name, grade, text, review.userID, user.username AS userName
+    FROM review 
+    INNER JOIN user ON 
+    review.userID = user.userID;";
     $stm = $pdo->query($sql);
     $all = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $all;

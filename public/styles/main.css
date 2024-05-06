@@ -5,6 +5,7 @@ body {
     background-image: url('../images/movie.jpg');
     background-repeat: no-repeat;
     background-position: left;
+    background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -26,7 +27,7 @@ header {
     width: 300px;
     transform: rotate(-40deg);
     position: absolute;
-    top: 200px;
+    top: 150px;
     left: 50px;
 }
 .header-navbar ul {
@@ -94,6 +95,7 @@ header {
 .yellow-button {
     background-color: rgb(226,189,46);
     color: #000;
+    border: 2px solid rgb(226,189,46);
 }
 .navbutton:disabled, .yellow-button:disabled {
   pointer-events: none;
@@ -102,10 +104,6 @@ header {
 .navbutton:hover, .yellow-button:hover, .submit-button:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
-}
-.yellow-button:hover {
-    box-shadow: rgba(245,230,0,0.25) 0 8px 15px;
-    transform: translateY(-2px);
 }
 .submit-button {
     width: 100px;
@@ -126,7 +124,13 @@ header {
   box-shadow: none;
   transform: translateY(0);
 }
-
+a.edit-button:link, a.delete-button:link,
+a.edit-button:visited, a.delete-button:visited {
+    color: #000;
+}
+a.edit-button:hover, a.delete-button:hover  {
+    color: grey;
+}
 .inputarea {
     display:flex;
     width: 60% ;
@@ -155,11 +159,17 @@ input, textarea {
     width: 40%;
 }
 .reviews-container {
-    /* background-color: #fff; */
     color: #000;
     width: 80%;
     margin: 100px 10%;
     border-radius: 15px;
+}
+.list-inline {
+    white-space:nowrap; 
+    margin-bottom: 20px;
+}
+.list-inline-item {
+    display: inline;
 }
 i {
     color: rgb(226,189,46);
@@ -174,12 +184,12 @@ i {
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 .review {
     width: 25%;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
     background-color: #fff;
 }
 .review p, .review h3 {
@@ -199,11 +209,30 @@ i {
     text-transform: uppercase;
     color: grey;
 }
+.update-title {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #fff;
+}
+.update-form {
+    margin-bottom: 50px;
+}
+.update-form input, .update-form textarea, .update-form select {
+    margin: 10px 0 20px 0;
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    outline: none;
+}
+label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
 footer {
     background-color: #000;
     color: #fff;
     padding: 50px 100px 100px 100px;
-    /* width: 100%; */
     min-height: 50px;
     color:  rgb(226,189,46);
 }
@@ -222,8 +251,4 @@ footer {
 .copyright {
     display: inline-block;
 }
-@media only screen and (max-width: 1600px) {
-    .main-title {
-        top: 150px;
-    }
-}
+

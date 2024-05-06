@@ -14,7 +14,7 @@ function registerController(){
             echo "Virhe tietokantaan tallennettaessa: " . $e->getMessage();
         }
     } 
-    else {
+    else { 
         require "../views/registration.view.php";
     }
 }
@@ -35,10 +35,6 @@ function loginController(){
         else {
             require "../views/login.view.php";
         }
-     
-    // else {
-    //     require "../views/login.view.php";
-    // }
 }
 
 function logoutController(){

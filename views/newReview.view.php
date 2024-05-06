@@ -1,22 +1,19 @@
 <?php require "../partials/header.php"; ?>
 
-<div class="reviews-container">
-    <h2 class="centered">Syötä arvostelu</h2>
+<h2 class="update-title centered">Syötä arvostelu</h2>
 
-    <div class="inputarea">
-    <form  action="/add_review" method="post" >
+<div class="inputarea">
+
+    <form class="update-form" action="/add_review" method="post" >
         
         <label for="nimi">Nimi:</label>
         <input id="nimi" type="text" name="reviewName" maxlength="30">
         
         <label for="arvostelu">Arvostelu:</label>
-        <textarea id="arvostelu" name="reviewText" rows="5" cols="30"></textarea>     
-        
-        <!-- <label for="paiva">Valitse artikkelin päivämäärä</label>
-        <input id="paiva" type="datetime-local"  name="reviewDate">  -->
+        <textarea id="arvostelu" name="reviewText" rows="10" cols="30"></textarea>     
         
         <label for="arvosana">Arvosana: </label>
-        <input id="arvosana" type="text" name="reviewGrade">
+        <input id="arvosana" type="number" min="1" max="5" name="reviewGrade">
         
         <label for="tyyppi">Valitse osasto:</label>
         <select id="tyyppi" name="type">
@@ -26,9 +23,9 @@
             <option value="sarja">Sarja</option>
         </select>
         
-        <input id="sendbutton" type="submit" value="Lähetä">
+        <button id="sendbutton" class="yellow-button" type="submit" value="Lähetä">Lähetä</button>
 
     </form>
 </div>
-</div>
+
 <?php require "../partials/footer.php"; ?>

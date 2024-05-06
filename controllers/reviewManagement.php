@@ -14,7 +14,7 @@ function viewReviewsController(){
     else {
         $allReviews = getAllReviews();
     }
-    require ".././views/review.view.php";    
+    require "../views/review.view.php";    
 }
 
 // POST values are from "name" in views
